@@ -1,0 +1,62 @@
+# Portable Dev Environment - Git Setup
+# This .gitignore excludes large binary files that shouldn't be pushed to Git
+# These files will be downloaded separately (see GIT_SETUP.md)
+
+MANUAL_STEPS.md
+# Container images (too large for Git - ~3.5 GB total)
+images/*.tar
+images/*.sif
+
+# Podman portable binaries (~300 MB)
+podman/
+
+# VcXsrv binaries (~40 MB)
+vcxsrv/
+
+# Neovim portable binaries (~50 MB)
+tools/nvim-portable/
+tools/nvim-linux64/
+
+# Qt Designer binaries (~250 MB)
+tools/designer/
+tools/qt-*/
+
+# Eclipse portable (~900 MB)
+tools/eclipse-portable/
+
+# Neovim plugin cache and state
+config/nvim/lazy-lock.json
+config/nvim/.luarc.json
+config/nvim/plugin/
+
+# SSH keys (security - don't push private keys!)
+config/.ssh/id_*
+config/.ssh/known_hosts
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary files
+*.log
+*.tmp
+*.swp
+*~
+
+# Build artifacts in projects
+projects/**/target/
+projects/**/build/
+projects/**/__pycache__/
+projects/**/*.pyc
+projects/**/.pytest_cache/
+projects/**/.venv/
+projects/**/venv/
+projects/**/node_modules/
+projects/**/.gradle/
+projects/**/.idea/
+projects/**/.vscode/
+
+# Keep the project directories but not their contents initially
+!projects/python/.gitkeep
+!projects/java/.gitkeep

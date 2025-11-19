@@ -1,0 +1,42 @@
+# Java Projects Directory
+
+Place your Java projects here.
+
+Each project should be in its own subdirectory:
+
+```
+java/
+├── Project1/
+│   ├── src/
+│   ├── pom.xml (Maven)
+│   └── README.md
+├── Project2/
+│   └── ...
+└── ...
+```
+
+## Quick Start
+
+Inside the container:
+
+```bash
+cd /workspace/YourProject
+javac src/Main.java
+java -cp src Main
+```
+
+## Maven Projects
+
+```bash
+cd /workspace/YourProject
+mvn clean install
+mvn exec:java
+```
+
+## Gradle Projects
+
+```bash
+cd /workspace/YourProject
+gradle build
+gradle run
+```

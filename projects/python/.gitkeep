@@ -1,0 +1,36 @@
+# Python Projects Directory
+
+Place your Python projects here.
+
+Each project should be in its own subdirectory:
+
+```
+python/
+├── project1/
+│   ├── main.py
+│   ├── requirements.txt
+│   └── README.md
+├── project2/
+│   └── ...
+└── ...
+```
+
+## Quick Start
+
+Inside the container:
+
+```bash
+cd /workspace
+python3 your_script.py
+```
+
+## Virtual Environments
+
+For project-specific dependencies:
+
+```bash
+cd your_project/
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
