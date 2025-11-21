@@ -41,6 +41,7 @@ ENV PYTHONUNBUFFERED=1
 RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
+    python3-venv \
     python3-pyqt6 \
     python3-pyqt6.qtsvg \
     pyqt6-dev-tools \
@@ -48,12 +49,23 @@ RUN apt-get update && apt-get install -y \
     curl \
     wget \
     build-essential \
+    libxcb-xinerama0 \
+    libxcb-cursor0 \
+    libxkbcommon-x11-0 \
+    libxcb-icccm4 \
+    libxcb-image0 \
+    libxcb-keysyms1 \
+    libxcb-randr0 \
+    libxcb-render-util0 \
+    libxcb-shape0 \
+    fonts-dejavu-core \
     && pip3 install --break-system-packages \
         debugpy \
         black \
         pyright \
         pylint \
         pytest \
+        ipython \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -90,6 +102,14 @@ RUN apt-get update && apt-get install -y \
     git \
     curl \
     wget \
+    libxext6 \
+    libxrender1 \
+    libxtst6 \
+    libxi6 \
+    libxrandr2 \
+    libfreetype6 \
+    fontconfig \
+    fonts-dejavu-core \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
