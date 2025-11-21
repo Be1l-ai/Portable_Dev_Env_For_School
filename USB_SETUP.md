@@ -58,38 +58,76 @@ cd /run/media/$USER/DEVUSB   # or wherever it mounts
 mkdir -p podman vcxsrv tools images projects/python projects/java config
 ```
 
-### 3. Install Podman Portable
+### 3. Install Podman
 
-Download Podman portable binaries (works on both Linux and Windows without admin):
+**Two approaches depending on your school PC permissions:**
 
-```bash
-# Download Podman portable
-wget https://github.com/containers/podman/releases/download/v5.3.0/podman-remote-release-linux_amd64.zip
-unzip podman-remote-release-linux_amd64.zip -d podman/
-rm podman-remote-release-linux_amd64.zip
+#### Option A: School PC Allows Podman (Recommended)
 
-# Also get Windows version
-wget https://github.com/containers/podman/releases/download/v5.3.0/podman-remote-release-windows_amd64.zip
-unzip podman-remote-release-windows_amd64.zip -d podman/
-rm podman-remote-release-windows_amd64.zip
-```
-
-### 4. Install VcXsrv (X11 for Windows)
+If your school PCs have Podman installed or allow you to run portable apps:
 
 ```bash
-# Download VcXsrv portable
-wget https://sourceforge.net/projects/vcxsrv/files/vcxsrv/1.20.14.0/vcxsrv-64.1.20.14.0.installer.exe/download -O vcxsrv-installer.exe
+# On your build machine (Ubuntu 24.04), install Podman to build images:
+sudo apt update
+sudo apt install podman
 
-# Extract using 7zip or similar (or just copy the installer - it will extract on first run)
-# For portable version, you need the extracted files, not the installer
-# Alternatively, install on a Windows machine, then copy the installation folder
+# Verify installation
+podman --version
 ```
 
-**Alternative (easier):** On a Windows machine, install VcXsrv normally, then copy:
-- `C:\Program Files\VcXsrv\vcxsrv.exe`
-- `C:\Program Files\VcXsrv\*.dll`
+The school PC will use the container images from your USB without needing Podman binaries on the USB.
 
-to your `vcxsrv/` folder on the USB.
+#### Option B: Truly Portable (No Podman on School PC)
+
+**For Windows school PCs without Podman:**
+
+Unfortunately, Podman on Windows requires WSL2, which needs admin rights. However, you have alternatives:
+
+1. **Ask IT to install Podman Desktop** (it's free and legitimate dev tool)
+2. **Use the Git-based approach** instead (see GIT_SETUP.md) if school PCs allow installing software
+3. **Use Docker Desktop** if it's already installed on school PCs (works the same way)
+
+**Reality check:** Container technology requires some runtime. The `.tar` files on USB are just images - they need Podman/Docker to run them.
+
+**Best approach for restricted PCs:**
+- Store everything on USB (images, projects, configs)
+- Use school PC's installed container runtime (if any)
+- Or use Git-based setup and download images once per PC
+
+### 4. Install VcXsrv (X11 for Windows GUI Support)
+
+**VcXsrv is portable and goes ON YOUR USB, not on the school PC!**
+
+VcXsrv is a Windows executable, so you can't extract it properly on Linux, but you **can** download it:
+
+```bash
+# Stay in your USB root directory
+cd /run/media/$USER/DEVUSB   # or wherever your USB is mounted
+
+# Download VcXsrv installer (Windows .exe file)
+wget https://sourceforge.net/projects/vcxsrv/files/vcxsrv/1.20.14.0/vcxsrv-64.1.20.14.0.installer.exe/download -O vcxsrv/vcxsrv-installer.exe
+
+# Note: The installer needs to be extracted on a Windows PC
+```
+
+**You'll need to extract it on Windows later:**
+
+When you get to a Windows PC:
+1. Run `vcxsrv/vcxsrv-installer.exe` from your USB
+2. Install it temporarily to extract files
+3. Copy `C:\Program Files\VcXsrv\*` back to `vcxsrv/` on USB
+4. Delete the installer and uninstall VcXsrv from that PC
+
+**Or use the helper script on Windows:**
+```cmd
+REM On any Windows PC, from your USB:
+E:\download_vcxsrv.bat
+```
+
+**Alternative: Skip for now**
+- You can build the container images on Linux now
+- Add VcXsrv later when you're on a Windows PC
+- Container images work on Linux without VcXsrv (uses native X11)
 
 ### 5. Install Neovim Portable with Kickstart
 

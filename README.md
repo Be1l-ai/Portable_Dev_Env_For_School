@@ -186,10 +186,11 @@ Portable_Dev_Env_For_School/
 
 | Document | Description |
 |----------|-------------|
-| [USB_SETUP.md](USB_SETUP.md) | Complete guide to building the USB setup |
+| [USB_SETUP.md](USB_SETUP.md) | Complete guide to building the USB setup (Linux portion) |
+| [WINDOWS_SETUP.md](WINDOWS_SETUP.md) | **Add Windows tools to USB** (VcXsrv, Qt Designer, Eclipse) |
 | [GIT_SETUP.md](GIT_SETUP.md) | Complete guide to using Git-based setup |
 | [QUICKSTART.md](QUICKSTART.md) | Daily usage instructions and tips |
-| [INSTRUCTIONS.md](INSTRUCTIONS.md) | Original project requirements |
+| [MANUAL_STEPS.md](MANUAL_STEPS.md) | Manual steps checklist and FAQ |
 
 ---
 
@@ -199,6 +200,10 @@ Portable_Dev_Env_For_School/
 |--------|----------|---------|
 | `START_WINDOWS.bat` | Windows | Start development environment |
 | `start_linux.sh` | Linux | Start development environment |
+| `setup_school_pc.bat` | Windows | **One-time setup on school PC** (WSL2 + Docker/Podman + load images) |
+| `setup_school_pc.sh` | Linux | **One-time setup on school PC** (Docker/Podman + load images) |
+| `setup_windows_tools.bat` | Windows | **Add Windows tools to USB** (VcXsrv, Qt Designer, Eclipse) |
+| `download_vcxsrv.bat` | Windows | Download/copy VcXsrv to USB |
 | `build_images.sh` | Linux | Build container images from scratch |
 | `download_images.sh` | Linux | Download pre-built container images |
 | `download_images.bat` | Windows | Download pre-built container images |

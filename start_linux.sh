@@ -1,12 +1,30 @@
 #!/bin/bash
 # Portable Dev Environment for Linux
-# Starts Podman containers for Python/Java GUI development
+# Starts containers for Python/Java GUI development
+# Supports both Docker and Podman
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 echo "========================================"
 echo "  Portable Dev Environment (Linux)"
 echo "========================================"
+echo
+
+# Detect container runtime
+if command -v podman &> /dev/null; then
+    CONTAINER_CMD="podman"
+    echo "Using: Podman"
+elif command -v docker &> /dev/null; then
+    CONTAINER_CMD="docker"
+    echo "Using: Docker"
+else
+    echo "ERROR: No container runtime found!"
+    echo "Please install either:"
+    echo "  - Podman: sudo apt install podman"
+    echo "  - Docker: https://docs.docker.com/engine/install/"
+    exit 1
+fi
+
 echo
 echo "Choose your environment:"
 echo "  [p] Python + PyQt6"
@@ -18,7 +36,7 @@ case "$choice" in
     p|P)
         echo
         echo "Starting Python container with GUI support..."
-        podman run -it --rm \
+        $CONTAINER_CMD run -it --rm \
             -v "$SCRIPT_DIR/projects/python:/workspace" \
             -w /workspace \
             -e DISPLAY=$DISPLAY \
@@ -29,7 +47,7 @@ case "$choice" in
     j|J)
         echo
         echo "Starting Java container with GUI support..."
-        podman run -it --rm \
+        $CONTAINER_CMD run -it --rm \
             -v "$SCRIPT_DIR/projects/java:/workspace" \
             -w /workspace \
             -e DISPLAY=$DISPLAY \
