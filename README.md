@@ -188,22 +188,9 @@ code .
 
 ```
 Portable_Dev_Env_For_School/
-├── START_WINDOWS.bat          # Windows launcher
-├── start_linux.sh             # Linux launcher
-├── download_images.sh         # Helper to download containers (Linux)
-├── download_images.bat        # Helper to download containers (Windows)
-├── build_images.sh            # Build containers from scratch
-├── .gitignore                 # Excludes large binaries from Git
 │
-├── Documentation/
-│   ├── README.md              # This file
-## File Structure
-
-```
-Portable_Dev_Env_For_School/
-│
-├── auto-setup.bat             # 🚀 Windows: Run this first!
-├── auto-setup.sh              # 🚀 Linux: Run this first!
+├── auto-setup.bat             # Windows: Run this first!
+├── auto-setup.sh              # Linux: Run this first!
 ├── START_WINDOWS.bat          # Daily launcher for Windows
 ├── start_linux.sh             # Daily launcher for Linux
 │
@@ -231,7 +218,6 @@ Portable_Dev_Env_For_School/
 ├── docu/                      # Documentation
 │   ├── USB_SETUP.md           # USB setup instructions
 │   ├── GIT_SETUP.md           # Git setup instructions
-│   ├── QUICKSTART.md          # Daily usage guide
 │   └── WINDOWS_SETUP.md       # Windows tools setup
 │
 ├── podman/                    # Podman binaries (Windows, excluded from Git)
@@ -288,7 +274,6 @@ Portable_Dev_Env_For_School/
 | [docu/USB_SETUP.md](docu/USB_SETUP.md) | Complete guide to building the USB setup |
 | [docu/GIT_SETUP.md](docu/GIT_SETUP.md) | Complete guide to using Git-based setup |
 | [docu/WINDOWS_SETUP.md](docu/WINDOWS_SETUP.md) | How to add Windows tools to USB |
-| [docu/QUICKSTART.md](docu/QUICKSTART.md) | Daily usage instructions and tips |
 | [scripts/containers/README.md](scripts/containers/README.md) | VS Code Dev Containers setup guide |
 | [workspace/README.md](workspace/README.md) | Workspace transformation workflow |
 
@@ -384,13 +369,6 @@ public class Main {
 - Run `download_images.sh` or `download_images.bat`
 - Or build from scratch: `./build_images.sh`
 
-### Neovim LSP not working
-- Inside Neovim: `:LspInfo` to check status
-- Install missing servers: `:Mason`
-- Check health: `:checkhealth`
-
-More troubleshooting tips in [QUICKSTART.md](QUICKSTART.md).
-
 ---
 
 ## Acknowledgments
@@ -398,7 +376,5 @@ More troubleshooting tips in [QUICKSTART.md](QUICKSTART.md).
 Built with:
 - [Podman](https://podman.io/) - Container runtime
 - [VcXsrv](https://sourceforge.net/projects/vcxsrv/) - X11 server for Windows
-- [Neovim](https://neovim.io/) - Modern text editor
-- [Kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim) - Neovim configuration
 - [PyQt6](https://www.riverbankcomputing.com/software/pyqt/) - Python GUI framework
 - [Ubuntu](https://ubuntu.com/) - Container base image
