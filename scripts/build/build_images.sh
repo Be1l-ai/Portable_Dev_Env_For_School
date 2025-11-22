@@ -23,6 +23,11 @@ if ! command -v podman &> /dev/null; then
     exit 1
 fi
 
+# Get script directory and navigate to repo root
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+cd "$REPO_ROOT"
+
 # Create images directory if it doesn't exist
 mkdir -p images
 
@@ -150,6 +155,7 @@ esac
 echo ""
 echo -e "${GREEN}=== Build Complete! ===${NC}"
 echo -e "Images saved in ${YELLOW}images/${NC} directory."
+echo -e "Total size: ~2.2 GB (python-gui.tar: ~1.1 GB, java-gui.tar: ~1.1 GB)"
 echo ""
 echo -e "You can now:"
 echo -e "  1. Run ${YELLOW}./start_linux.sh${NC} to start using the containers"

@@ -2,6 +2,29 @@
 
 **A lightweight, portable Python + Java GUI development environment that works on restricted Windows lab PCs and Linux without admin rights.**
 
+## Quick Start
+
+### First Time Setup (Automatic)
+
+**Windows:**
+```batch
+auto-setup.bat
+```
+
+**Linux:**
+```bash
+./auto-setup.sh
+```
+
+These scripts automatically:
+1. Check/download/build container images
+2. Detect USB drive (if present)
+3. Set up Windows tools (VcXsrv, Qt Designer, Eclipse)
+4. Configure school PC (WSL2, Docker)
+5. Launch the development environment
+
+---
+
 ## Why This Exists
 
 - School computers have restrictive policies (no admin, limited software)
@@ -17,11 +40,11 @@
 - 📝 **Neovim** with LSP, debugger, and autocomplete (Kickstart.nvim)
 - 🎨 **Qt Designer** for visual PyQt6 UI design
 - 🖼️ **Eclipse + WindowBuilder** for visual Swing UI design
-- 🐳 **Podman** containers (works without admin/Docker)
+- 🐳 **Podman/Docker** containers (works without admin on Windows via WSL2)
 - 🪟 **VcXsrv** X11 server for GUI support on Windows
 - 📦 **Git** for version control with GitHub/GitLab
 
-**Total size:** ~4.3 GB (fits on 8 GB USB stick or can be cloned via Git)
+**Total size:** ~2.2 GB for container images + tools (fits on 4 GB USB stick or can be cloned via Git)
 
 ---
 
@@ -58,7 +81,7 @@ Clone the environment from Git whenever you need it, download container images s
 - Works on USB-blocked computers
 
 **Cons:**
-- First-time setup downloads ~4.2 GB
+- First-time setup downloads ~2.4 GB
 - Requires internet for initial clone
 - Need to clean up afterward on shared PCs
 
@@ -139,45 +162,73 @@ Portable_Dev_Env_For_School/
 │
 ├── Documentation/
 │   ├── README.md              # This file
+## File Structure
+
+```
+Portable_Dev_Env_For_School/
+│
+├── auto-setup.bat             # 🚀 Windows: Run this first!
+├── auto-setup.sh              # 🚀 Linux: Run this first!
+├── START_WINDOWS.bat          # Daily launcher for Windows
+├── start_linux.sh             # Daily launcher for Linux
+│
+├── scripts/                   # Helper scripts (organized)
+│   ├── build/                 # Build & download scripts
+│   │   ├── build_images.sh    # Build containers from scratch
+│   │   ├── download_images.sh # Download from GitHub Releases
+│   │   └── download_images.bat
+│   └── setup/                 # Setup scripts
+│       ├── setup_school_pc.bat      # One-time PC setup (WSL2/Docker)
+│       ├── setup_windows_tools.bat  # Add tools to USB
+│       └── download_vcxsrv.bat      # VcXsrv helper
+│
+├── docs/                      # Documentation
+│   ├── README.md              # This file
 │   ├── USB_SETUP.md           # USB setup instructions
 │   ├── GIT_SETUP.md           # Git setup instructions
 │   ├── QUICKSTART.md          # Daily usage guide
-│   └── INSTRUCTIONS.md        # Original requirements
+│   └── WINDOWS_SETUP.md       # Windows tools setup
 │
-├── podman/                    # Podman portable binaries (excluded from Git)
+├── podman/                    # Podman binaries (Windows, excluded from Git)
 ├── vcxsrv/                    # VcXsrv X11 server (excluded from Git)
 ├── tools/                     # Development tools (excluded from Git)
-│   ├── nvim-portable/         # Neovim portable
-│   ├── designer/              # Qt Designer
-│   └── eclipse-portable/      # Eclipse + WindowBuilder
+│   ├── designer/              # Qt Designer for PyQt6
+│   └── eclipse/               # Eclipse for Java Swing
 │
 ├── images/                    # Container images (excluded from Git)
-│   ├── python-gui.tar         # Python container (~1.8 GB)
-│   └── java-gui.tar           # Java container (~1.6 GB)
+│   ├── python-gui.tar         # Python container (~1.1 GB)
+│   └── java-gui.tar           # Java container (~1.1 GB)
 │
 ├── projects/                  # Your code goes here
 │   ├── python/                # Python projects
 │   └── java/                  # Java projects
 │
 └── config/                    # Shared configurations
-    ├── nvim/                  # Neovim config (Kickstart.nvim)
-    └── .ssh/                  # SSH keys for Git (optional)
+    └── ssh/                   # SSH keys for Git (optional)
 ```
+
+**Key Files:**
+- `auto-setup.bat/sh` - Automated first-time setup (recommended)
+- `START_WINDOWS.bat` - Daily launcher for Windows
+- `start_linux.sh` - Daily launcher for Linux
+- `scripts/build/` - Image building and downloading
+- `scripts/setup/` - One-time setup helpers
 
 ---
 
 ## System Requirements
 
 ### Windows
-- Windows 10/11 (no admin required)
-- WSL 2 enabled (usually already enabled on school PCs)
-- 4.5 GB free disk space
+- Windows 10/11 (no admin required for daily use)
+- WSL 2 (installed by auto-setup.bat if missing)
+- Docker Desktop or Podman (installed by setup script)
+- 2.5 GB free disk space
 - USB port (for USB setup) or internet (for Git setup)
 
 ### Linux
 - Any modern Linux distro (Ubuntu, Fedora, etc.)
 - Podman installed (`apt install podman` or `dnf install podman`)
-- 4.5 GB free disk space
+- 2.5 GB free disk space
 - X11 display server (usually pre-installed)
 
 ---
@@ -186,8 +237,8 @@ Portable_Dev_Env_For_School/
 
 | Document | Description |
 |----------|-------------|
-| [USB_SETUP.md](USB_SETUP.md) | Complete guide to building the USB setup (Linux portion) |
-| [WINDOWS_SETUP.md](WINDOWS_SETUP.md) | **Add Windows tools to USB** (VcXsrv, Qt Designer, Eclipse) |
+| [USB_SETUP.md](USB_SETUP.md) | Complete guide to building the USB setup |
+| [WINDOWS_SETUP.md](WINDOWS_SETUP.md) | How to add Windows tools to USB |
 | [GIT_SETUP.md](GIT_SETUP.md) | Complete guide to using Git-based setup |
 | [QUICKSTART.md](QUICKSTART.md) | Daily usage instructions and tips |
 | [MANUAL_STEPS.md](MANUAL_STEPS.md) | Manual steps checklist and FAQ |

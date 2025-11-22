@@ -14,6 +14,11 @@ YELLOW='\033[1;33m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
+# Get script directory and navigate to repo root
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+cd "$REPO_ROOT"
+
 echo -e "${GREEN}=== Container Images Download Script ===${NC}"
 echo -e "Repository: ${YELLOW}$REPO${NC}"
 echo -e "Version: ${YELLOW}$VERSION${NC}"
@@ -47,7 +52,7 @@ PYTHON_FILE="images/python-gui.tar"
 if [ -f "$PYTHON_FILE" ]; then
     echo -e "${YELLOW}Python container image already exists. Skipping download.${NC}"
 else
-    echo -e "${GREEN}Downloading Python container image (~1.8 GB)...${NC}"
+    echo -e "${GREEN}Downloading Python container image (~1.1 GB)...${NC}"
     if [ "$DOWNLOADER" = "wget" ]; then
         wget -c "$PYTHON_URL" -O "$PYTHON_FILE"
     else
@@ -65,7 +70,7 @@ JAVA_FILE="images/java-gui.tar"
 if [ -f "$JAVA_FILE" ]; then
     echo -e "${YELLOW}Java container image already exists. Skipping download.${NC}"
 else
-    echo -e "${GREEN}Downloading Java container image (~1.6 GB)...${NC}"
+    echo -e "${GREEN}Downloading Java container image (~1.1 GB)...${NC}"
     if [ "$DOWNLOADER" = "wget" ]; then
         wget -c "$JAVA_URL" -O "$JAVA_FILE"
     else

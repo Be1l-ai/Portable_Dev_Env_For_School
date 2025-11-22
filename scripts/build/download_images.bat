@@ -2,6 +2,9 @@
 REM download_images.bat - Download container images from GitHub Releases (Windows)
 REM Usage: download_images.bat [REPO] [VERSION]
 
+REM Navigate to repo root (2 levels up from scripts/build/)
+cd /d "%~dp0..\.."
+
 REM Use safe variable setting (prevents parsing issues with spaces/special chars)
 set "REPO=%~1"
 if "%REPO%"=="" set "REPO=Be1l-ai/Portable_Dev_Env_For_School"
@@ -43,7 +46,7 @@ set "PYTHON_FILE=images\python-gui.tar"
 if exist "%PYTHON_FILE%" (
     echo Python container image already exists. Skipping download.
 ) else (
-    echo Downloading Python container image (~1.8 GB)...
+    echo Downloading Python container image (~1.1 GB)...
     echo URL: %PYTHON_URL%
     if "%DOWNLOADER%"=="curl" (
         curl -L --progress-bar -o "%PYTHON_FILE%" "%PYTHON_URL%"
@@ -68,7 +71,7 @@ set "JAVA_FILE=images\java-gui.tar"
 if exist "%JAVA_FILE%" (
     echo Java container image already exists. Skipping download.
 ) else (
-    echo Downloading Java container image (~1.6 GB)...
+    echo Downloading Java container image (~1.1 GB)...
     echo URL: %JAVA_URL%
     if "%DOWNLOADER%"=="curl" (
         curl -L --progress-bar -o "%JAVA_FILE%" "%JAVA_URL%"
