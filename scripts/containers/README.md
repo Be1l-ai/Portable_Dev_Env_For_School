@@ -329,3 +329,43 @@ python projects/python/main.py
 ```
 
 But **Dev Containers is highly recommended** for the best development experience!
+
+---
+
+## Workspace Mode Integration
+
+If you're using **Workspace Mode** (see [../../workspace/README.md](../../workspace/README.md)), the workflow is:
+
+```bash
+# 1. Clone and setup
+git clone https://github.com/Be1l-ai/Portable_Dev_Env_For_School.git
+cd Portable_Dev_Env_For_School
+./auto-setup.sh
+
+# 2. Setup Dev Containers
+./scripts/containers/setup_devcontainer.sh all
+
+# 3. Transform to workspace (removes setup files, connects to YOUR repo)
+./workspace/cleanup.sh
+
+# 4. Now you have:
+#    - projects/python/.devcontainer/ (VS Code ready)
+#    - projects/java/.devcontainer/ (VS Code ready)
+#    - images/ (container images)
+#    - Connected to YOUR Git repo
+
+# 5. Code, commit, push
+
+# 6. Safe deletion when done
+./workspace/bailout.sh
+```
+
+---
+
+## Learn More
+
+- [VS Code Dev Containers Documentation](https://code.visualstudio.com/docs/devcontainers/containers)
+- [Dev Containers Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop)
+- [Podman Desktop](https://podman-desktop.io/)
+- [Workspace Workflow Guide](../../workspace/README.md) - Transform setup into your project

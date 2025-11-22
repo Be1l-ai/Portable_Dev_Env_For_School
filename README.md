@@ -48,19 +48,18 @@ These scripts automatically:
 
 ---
 
-## Two Setup Options
+## Three Setup Options
 
-### Option 1: USB Setup (Recommended for frequent use)
+### Option 1: USB Setup (For offline use)
 
 Build everything once on a USB stick, then plug and play on any computer.
 
-👉 **[USB Setup Guide](USB_SETUP.md)**
+👉 **[USB Setup Guide](docu/USB_SETUP.md)**
 
 **Pros:**
 - Works completely offline after initial setup
 - Fastest startup (15 seconds)
 - No need to download anything on school PCs
-- Can use on computers without internet
 
 **Cons:**
 - Requires 8 GB USB stick (~$10)
@@ -68,22 +67,40 @@ Build everything once on a USB stick, then plug and play on any computer.
 
 ---
 
-### Option 2: Git-Based Setup (Recommended for flexibility)
+### Option 2: Git-Based Setup (For flexibility)
 
 Clone the environment from Git whenever you need it, download container images separately.
 
-👉 **[Git Setup Guide](GIT_SETUP.md)**
+👉 **[Git Setup Guide](docu/GIT_SETUP.md)**
 
 **Pros:**
 - No USB stick needed
 - Easy to update (`git pull`)
-- Can sync code changes automatically
 - Works on USB-blocked computers
 
 **Cons:**
 - First-time setup downloads ~2.4 GB
 - Requires internet for initial clone
-- Need to clean up afterward on shared PCs
+
+---
+
+### Option 3: Workspace Mode (For school assignments)
+
+Clone, set up, transform into YOUR project workspace, then safely delete when done.
+
+👉 **[Workspace Workflow Guide](workspace/README.md)**
+
+**Pros:**
+- Keeps only what you need (images, projects, tools)
+- Connects to YOUR Git repo for assignments
+- Safe deletion with backup verification
+- Leave no trace on school PCs
+
+**Cons:**
+- Must push to remote before deletion
+- Setup files removed after cleanup
+
+**Perfect for:** School lab computers where you want to work on assignments and push to your own repo
 
 ---
 
@@ -98,8 +115,8 @@ REM With USB:
 E:
 START_WINDOWS.bat
 
-REM With Git:
-cd C:\Temp\dev
+REM With Git/Workspace:
+cd C:\Users\%USERNAME%\Documents\MyProject
 START_WINDOWS.bat
 ```
 
@@ -114,7 +131,25 @@ cd /path/to/dev/environment
 
 Choose Python (`p`) or Java (`j`) and start coding!
 
-👉 **[Daily Usage Guide](QUICKSTART.md)**
+### VS Code Development (Recommended)
+
+For the best coding experience, use VS Code Dev Containers:
+
+```bash
+# Setup devcontainer configs
+scripts/containers/setup_devcontainer.sh all
+
+# Open project in VS Code
+cd projects/python
+code .
+
+# F1 → "Dev Containers: Reopen in Container"
+# Now code with full IntelliSense!
+```
+
+👉 **[VS Code Dev Containers Guide](scripts/containers/README.md)**  
+👉 **[Workspace Workflow Guide](workspace/README.md)**  
+👉 **[Daily Usage Guide](docu/QUICKSTART.md)**
 
 ---
 
@@ -177,13 +212,23 @@ Portable_Dev_Env_For_School/
 │   │   ├── build_images.sh    # Build containers from scratch
 │   │   ├── download_images.sh # Download from GitHub Releases
 │   │   └── download_images.bat
-│   └── setup/                 # Setup scripts
-│       ├── setup_school_pc.bat      # One-time PC setup (WSL2/Docker)
-│       ├── setup_windows_tools.bat  # Add tools to USB
-│       └── download_vcxsrv.bat      # VcXsrv helper
+│   ├── setup/                 # Setup scripts
+│   │   ├── setup_school_pc.bat      # One-time PC setup (WSL2/Docker)
+│   │   ├── setup_windows_tools.bat  # Add tools to USB
+│   │   └── download_vcxsrv.bat      # VcXsrv helper
+│   ├── containers/            # Dev container setup
+│   │   ├── setup_devcontainer.sh    # Create VS Code devcontainer configs
+│   │   ├── setup_devcontainer.bat
+│   │   └── README.md                # Dev Containers guide
 │
-├── docs/                      # Documentation
-│   ├── README.md              # This file
+├── workspace/                 # Workspace transformation tools
+│   ├── cleanup.sh             # Convert to project workspace
+│   ├── cleanup.bat
+│   ├── bailout.sh             # Safe deletion after push
+│   ├── bailout.bat
+│   └── README.md              # Workspace workflow guide
+│
+├── docu/                      # Documentation
 │   ├── USB_SETUP.md           # USB setup instructions
 │   ├── GIT_SETUP.md           # Git setup instructions
 │   ├── QUICKSTART.md          # Daily usage guide
@@ -201,7 +246,9 @@ Portable_Dev_Env_For_School/
 │
 ├── projects/                  # Your code goes here
 │   ├── python/                # Python projects
+│   │   └── .devcontainer/     # VS Code config (after setup)
 │   └── java/                  # Java projects
+│       └── .devcontainer/     # VS Code config (after setup)
 │
 └── config/                    # Shared configurations
     └── ssh/                   # SSH keys for Git (optional)
@@ -209,10 +256,11 @@ Portable_Dev_Env_For_School/
 
 **Key Files:**
 - `auto-setup.bat/sh` - Automated first-time setup (recommended)
-- `START_WINDOWS.bat` - Daily launcher for Windows
-- `start_linux.sh` - Daily launcher for Linux
+- `START_WINDOWS.bat/start_linux.sh` - Daily launcher
 - `scripts/build/` - Image building and downloading
 - `scripts/setup/` - One-time setup helpers
+- `scripts/containers/` - VS Code Dev Containers setup
+- `scripts/workspace/` - Workspace transformation tools
 
 ---
 
@@ -237,27 +285,49 @@ Portable_Dev_Env_For_School/
 
 | Document | Description |
 |----------|-------------|
-| [USB_SETUP.md](USB_SETUP.md) | Complete guide to building the USB setup |
-| [WINDOWS_SETUP.md](WINDOWS_SETUP.md) | How to add Windows tools to USB |
-| [GIT_SETUP.md](GIT_SETUP.md) | Complete guide to using Git-based setup |
-| [QUICKSTART.md](QUICKSTART.md) | Daily usage instructions and tips |
-| [MANUAL_STEPS.md](MANUAL_STEPS.md) | Manual steps checklist and FAQ |
+| [docu/USB_SETUP.md](docu/USB_SETUP.md) | Complete guide to building the USB setup |
+| [docu/GIT_SETUP.md](docu/GIT_SETUP.md) | Complete guide to using Git-based setup |
+| [docu/WINDOWS_SETUP.md](docu/WINDOWS_SETUP.md) | How to add Windows tools to USB |
+| [docu/QUICKSTART.md](docu/QUICKSTART.md) | Daily usage instructions and tips |
+| [scripts/containers/README.md](scripts/containers/README.md) | VS Code Dev Containers setup guide |
+| [workspace/README.md](workspace/README.md) | Workspace transformation workflow |
 
 ---
 
 ## Helper Scripts
 
+### Launchers
 | Script | Platform | Purpose |
 |--------|----------|---------|
-| `START_WINDOWS.bat` | Windows | Start development environment |
-| `start_linux.sh` | Linux | Start development environment |
-| `setup_school_pc.bat` | Windows | **One-time setup on school PC** (WSL2 + Docker/Podman + load images) |
-| `setup_school_pc.sh` | Linux | **One-time setup on school PC** (Docker/Podman + load images) |
-| `setup_windows_tools.bat` | Windows | **Add Windows tools to USB** (VcXsrv, Qt Designer, Eclipse) |
-| `download_vcxsrv.bat` | Windows | Download/copy VcXsrv to USB |
+| `auto-setup.bat/sh` | Both | **First-time automated setup** |
+| `START_WINDOWS.bat` | Windows | Daily development launcher |
+| `start_linux.sh` | Linux | Daily development launcher |
+
+### Build & Download (`scripts/build/`)
+| Script | Platform | Purpose |
+|--------|----------|---------|
 | `build_images.sh` | Linux | Build container images from scratch |
-| `download_images.sh` | Linux | Download pre-built container images |
-| `download_images.bat` | Windows | Download pre-built container images |
+| `download_images.sh` | Linux | Download pre-built images from GitHub |
+| `download_images.bat` | Windows | Download pre-built images from GitHub |
+
+### Setup (`scripts/setup/`)
+| Script | Platform | Purpose |
+|--------|----------|---------|
+| `setup_school_pc.bat` | Windows | **One-time PC setup** (WSL2/Docker + load images) |
+| `setup_windows_tools.bat` | Windows | **Add tools to USB** (VcXsrv, Qt, Eclipse) |
+| `download_vcxsrv.bat` | Windows | Download/install VcXsrv |
+
+### Dev Containers (`scripts/containers/`)
+| Script | Platform | Purpose |
+|--------|----------|---------|
+| `setup_devcontainer.sh` | Linux | Create VS Code devcontainer configs |
+| `setup_devcontainer.bat` | Windows | Create VS Code devcontainer configs |
+
+### Workspace (`workspace/`)
+| Script | Platform | Purpose |
+|--------|----------|---------|
+| `cleanup.sh/bat` | Both | **Convert to project workspace** (remove setup files) |
+| `bailout.sh/bat` | Both | **Safe deletion** (checks push, then deletes) |
 
 ---
 

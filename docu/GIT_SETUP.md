@@ -136,7 +136,40 @@ git pull
 START_WINDOWS.bat
 ```
 
-### Scenario 3: Work Session + Save Changes
+### Scenario 3: Workspace Mode (School Assignments)
+
+```cmd
+REM 1. Clone and setup
+cd C:\Users\%USERNAME%\Documents
+git clone https://github.com/Be1l-ai/Portable_Dev_Env_For_School.git
+cd Portable_Dev_Env_For_School
+auto-setup.bat
+
+REM 2. Transform into YOUR workspace
+workspace\cleanup.bat
+REM - Removes setup files
+REM - Prompts for YOUR repo URL
+REM - Now it's your project workspace!
+
+REM 3. Code in VS Code with Dev Containers
+scripts\containers\setup_devcontainer.bat all
+cd projects\python
+code .
+REM F1 → "Reopen in Container"
+
+REM 4. Commit and push YOUR work
+git add .
+git commit -m "Finished assignment"
+git push
+
+REM 5. Safe deletion (checks everything is pushed)
+workspace\bailout.bat
+REM Verifies push, then deletes workspace
+```
+
+👉 **[Workspace Workflow Guide](../workspace/README.md)**
+
+### Scenario 4: Work Session + Save Changes
 
 ```cmd
 REM Work on your project
@@ -150,7 +183,7 @@ git commit -m "Finished lab assignment"
 git push
 ```
 
-### Scenario 4: Leave No Trace (Clean Up)
+### Scenario 5: Leave No Trace (Clean Up)
 
 ```cmd
 REM After pushing your code
@@ -159,7 +192,16 @@ rmdir /s /q Portable_Dev_Env_For_School
 REM All files deleted - computer is clean
 ```
 
-### Scenario 5: Team Project
+### Scenario 5: Leave No Trace (Clean Up)
+
+```cmd
+REM After pushing your code
+cd C:\Users\%USERNAME%\Documents
+rmdir /s /q Portable_Dev_Env_For_School
+REM All files deleted - computer is clean
+```
+
+### Scenario 6: Team Project
 
 ```bash
 # Everyone clones the same repo
